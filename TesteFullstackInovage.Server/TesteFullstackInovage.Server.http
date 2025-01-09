@@ -1,0 +1,6 @@
+@TesteFullstackInovage.Server_HostAddress = http://localhost:5267
+
+GET {{TesteFullstackInovage.Server_HostAddress}}/businesspartners/
+Accept: application/json
+
+###

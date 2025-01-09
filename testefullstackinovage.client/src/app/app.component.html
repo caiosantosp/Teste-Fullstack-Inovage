@@ -1,0 +1,69 @@
+<h1 id="tableLabel">BUSINESS PARTNER MANAGER</h1>
+
+<p>Aplicação para gestão de Parceiros de Negócios do SAP.</p>
+
+<p *ngIf="!partners"><em>Aguarde, estamos carregando... Caso necessário, reinicie a página enquanto o backend é iniciado.</em></p>
+
+<div class="d-flex justify-content-center">
+  <div class="container col-8">
+    <table class="table table-bordered" *ngIf="partners">
+      <thead>
+        <tr>
+          <th scope="col">CardCode</th>
+          <th scope="col">CardName</th>
+          <th scope="col">City</th>
+          <th scope="col">Country</th>
+          <th scope="col">Detalhes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">
+            <input disabled type="text" [(ngModel)]="partner.cardCode" placeholder="CardCode" />
+          </th>
+          <td>
+            <input required type="text" [(ngModel)]="partner.cardName" placeholder="CardName" />
+          </td>
+          <td>
+            <input required type="text" [(ngModel)]="partner.city" placeholder="City" />
+          </td>
+          <td>
+            <input required type="text" [(ngModel)]="partner.country" placeholder="Country" />
+          </td>
+          <td>
+            <ul class="list-inline m-0">
+              <li class="list-inline-item">
+                <button class="btn btn-primary btn-sm rounded-0" type="button" (click)="createPartner(partner)" data-toggle="tooltip" data-placement="top" title="Create">
+                  <i class="fa fa-user-o"></i>
+                </button>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <tr *ngFor="let partner of partners">
+          <th scope="row">{{ partner.cardCode }}</th>
+          <td>
+            <input *ngIf="partner.isEditing" [(ngModel)]="partner.cardName" type="text" placeholder="CardName" />
+            <span *ngIf="!partner.isEditing">{{ partner.cardName }}</span>
+          </td>
+          <td>{{ partner.city }}</td>
+          <td>{{ partner.country }}</td>
+          <td>
+            <ul class="list-inline m-0 d-flex flex-wrap">
+              <li class="list-inline-item mb-2">
+                <button class="btn btn-success btn-sm rounded-0" type="button" (click)="toggleEdit(partner)" data-toggle="tooltip" data-placement="top" title="Edit">
+                  <i class="fa fa-edit"></i> {{ partner.isEditing ? 'Salvar' : 'Editar' }}
+                </button>
+              </li>
+              <li class="list-inline-item mb-2">
+                <button (click)="deletePartner(partner)" class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
